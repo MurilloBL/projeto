@@ -12,7 +12,7 @@
   --surface-color: rgba(255, 255, 255, 0.05);
   --surface-color-hover: rgba(255, 255, 255, 0.02);
   --highlight-color: rgba(255, 255, 255, 0.1);
-  --switch-bg-url: url(./assets/Switch_Stars.svg);
+  --switch-bg-url: url(./assets/moon-stars.svg);
 }
 
 .light {
@@ -22,7 +22,7 @@
   --surface-color: rgba(0, 0, 0, 0.05);
   --surface-color-hover: rgba(0, 0, 0, 0.02);
   --highlight-color: rgba(0, 0, 0, 0.1);
-  --switch-bg-url: url(./assets/Switch_Sun.svg);
+  --switch-bg-url: url(./assets/sun.svg);
 }
 
 body {
@@ -63,27 +63,44 @@ body * {
 /*switch*/
 #switch {
   position: relative;
-  width: 72px;
+  width: 64px;
   margin: 4px auto;
 }
 
 #switch button {
-  width: 72px;
-  height: 40px;
-  background: var(--switch-bg-url) no-repeat center;
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
   border: 0;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+
+  animation: slide-back 0.5s;
+}
+
+.light #switch button {
+  animation: slide-in 0.5s forwards;
+}
+
+#switch button:hover {
+  outline: 8px solid var(--highlight-color);
+  cursor: pointer;
 }
 
 #switch span {
   display: block; /*usa-se pq o span é inline*/
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  border-radius: 999px;
-}
-
-.light #switch button {
-  right: 0;
-  left: initial;
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
 }
 
 /*Links*/
@@ -100,8 +117,6 @@ ul li a {
   padding: 16px 24px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  align-self: stretch;
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
@@ -140,7 +155,7 @@ ul li a:hover {
 }
 
 footer {
-  padding: 24px;
+  padding: 24px 0;
   text-align: center;
   font-size: 14px;
 }
@@ -153,5 +168,24 @@ footer {
 
   .light {
     --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/*animation*/
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
   }
 }
